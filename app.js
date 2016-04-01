@@ -3,6 +3,16 @@
 
 // 1. Create a web server
 
+var http = require('http');
+http.createServer(function(req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  setInterval(function() {
+    res.write( new Date() + "\n");
+  }, 1000);
+  //res.end('Hello world\n');
+}).listen(3000);
+console.log('Server running at port 3000');
+
 // 2. Handle HTTP route GET / and POST / i.e. Home
   // if url == "/" && GET
     // show search
