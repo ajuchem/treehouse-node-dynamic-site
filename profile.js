@@ -20,7 +20,7 @@ function(res) {
     var body = "";
 
     if(res.statusCode !== 200) {
-      request.abort();
+      req.abort();
       // Status code error
       profileEmitter.emit("error", new Error("There was an error getting the profile for " + username + ". (" + http.STATUS_CODE[res.statusCode] + ")"))
     }
