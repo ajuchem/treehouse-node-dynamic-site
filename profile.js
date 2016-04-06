@@ -22,7 +22,7 @@ function(res) {
     if(res.statusCode !== 200) {
       req.abort();
       // Status code error
-      profileEmitter.emit("error", new Error("There was an error getting the profile for " + username + ". (" + http.STATUS_CODE[res.statusCode] + ")"))
+      profileEmitter.emit("error", new Error("There was an error getting the profile for " + username + ". (" + http.STATUS_CODES[res.statusCode] + ")"));
     }
     // Read the data
     res.on("data", function(chunk) {
