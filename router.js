@@ -1,5 +1,6 @@
 var Profile = require("./profile.js");
 var renderer = require("./renderer.js");
+var querystring = require("querystring");
 
 var commonHeaders = {'Content-Type': 'text/html'};
 
@@ -7,15 +8,26 @@ var commonHeaders = {'Content-Type': 'text/html'};
 function home(req, res) {
   // if url == "/" && GET
   if(req.url === "/") {
-    // show search
-    res.writeHead(200, commonHeaders);
-    renderer.view("header", {}, res);
-    renderer.view("search", {}, res);
-    renderer.view("footer", {}, res);
-    res.end();
+    if(req.method.toLowerCase() === "get"){
+      // show search
+      res.writeHead(200, commonHeaders);
+      renderer.view("header", {}, res);
+      renderer.view("search", {}, res);
+      renderer.view("footer", {}, res);
+      res.end();
+    } else {
+      // if URL == "/" && POST
+
+      // get post data from body
+      req.on("data", function(postBody) {
+        // extract the username
+        var query = querystring.parse(postBody.toString());
+        res.write(query.username);
+        res.end();
+          // redirect to /:username
+      });
+    }
   }
-  // if URL == "/" && POST
-    // redirect to /:username
 }
 
 // Handle HTTP route GET /:username i.e. /chalkers
