@@ -10,8 +10,3 @@ http.createServer(function(req, res) {
   router.user(req, res);
 }).listen(3000);
 console.log('Server running at port 3000');
-
-
-// Function that handles the reading of files and merge in value
-  // read from file and get a string
-    // merge values into string
